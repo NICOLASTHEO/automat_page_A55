@@ -1,32 +1,40 @@
 Resumo de informações:
 Para cada teste completo informar 3 CNPJs diferentes.
-Um CNPJ novo para Cenário:Cadastro de usuário com sucesso. Esquema do Cenário: Cadastro de usuário, Exemplos:, Linha 1.
+Um CNPJ novo para Cenário:Cadastro de usuário com sucesso. - Em Cadastro.features. Cenário: Cadastro de usuário, Exemplos:Linha 16 geral.
+
 Tendo em vista Falhas/Bugs na aplicação, pois Cadastra quando NÃO Deve Cadastrar, devemos informar mais dois CNPJ diferentes em complentação.
 Para constatação dos Bugs/falhas fazer como abaixo descrito:
-Um CNPJ novo e diferente para Cenário: Cargo com caracteres inválidos.
-Um CNPJ novo e diferente e um email novo para Cenário: Senha com caracteres inválidos.
+Um CNPJ novo e diferente para Cenário: Cargo com caracteres inválidos. - Em Cadastro.features. Esquema do Cenário: Não deve cadastrar,Linha 5. Linha 30 do geral.
+Um CNPJ novo e diferente e um email novo para Cenário: Senha com caracteres inválidos. - Em Cadastro.features. Esquema do Cenário: Não deve cadastrar,Linha 9. Linha 34 do geral.
 
-Cenário: Email_repetido 
-	Dado que acesso a pagina de cadastro
-		Quando faço meu cadastro com "Nome Sobrenome", "umemailqualquer@gmail.com", "11988776655", "um cargo", "67.160.507/0001-83", "senhamais8Dig", "10000.00", "100000.00", "checkbox"
-        Então vejo a mensagem "E-mail já cadastrado"
-#Deve-se usar CNPJ ainda não cadastrado para o validação da Mensagem de Email já cadastrado
-		
-Cenário: Senha_com_caracteres_inválidos
-        Dado que acesso a pagina de cadastro
-		Quando faço meu cadastro com "Nome Sobrenome", "umemailqualquer3@gmail.com", "11988776655", "um cargo", "01.607.539/0001-76", "-sou um erro ", "10000.00", "100000.00", "checkbox"
-        Então vejo a mensagem "Senha inválida"
-#Para ver bug deve-se informar CNPJ novo. Não informa o erro. Cadastra Normalmente mesmo senha com espaços. BUG
+Obs.1: Informar CNPJs diferentes a partir de:
+Em Cadastro.features. Cenário: Cadastro de usuário, Exemplos:Linha 16 geral. -> Usar CNPJ novo para Cenário:Cadastro de usuário com sucesso.
+Em Cadastro.features. Esquema do Cenário: Não deve cadastrar,Linha 2. Linha 27 do geral. -> Deve-se usar CNPJ ainda não cadastrado para o validação da Mensagem de Email já cadastrado.
+Em Cadastro.features. Esquema do Cenário: Não deve cadastrar,Linha 9. Linha 34 do geral. -> Deve-se usar CNPJ ainda não cadastrado. DEVERIA TER INFORMAÇÃO do tipo, SENHA INVÁLIDA, NÃO TEM!
+
+Obs.2: Informar Emails diferentes a partir de:
+Em Cadastro.features. Cenário: Cadastro de usuário, Exemplos:Linha 16 geral. -> Usar EMAIL novo para Cenário:Cadastro de usuário com sucesso.
+Em Cadastro.features. Esquema do Cenário: Não deve cadastrar,Linha 3. Linha 28 do geral. -> Deve-se usar EMAIL fora do padrão. Deveria ter informação do tipo, EMAIL VÁLIDO, NÃO TEM.
+Em Cadastro.features. Esquema do Cenário: Não deve cadastrar,Linha 5. Linha 30 do geral. -> Deve-se usar novo EMAIL para simular cadastro com sucesso. Deveria ter informação do tipo, CARGO INEXISTENTE ou Erro Cargo ETC. NÃO TEM. Aplicação cadastra Normalmente.
+Em Cadastro.features. Esquema do Cenário: Não deve cadastrar,Linha 7. Linha 32 do geral. -> Deve-se usar novo EMIAIL para simular cadastro com sucesso. Mensagem OK. O CNPJ já está em uso.
+Em Cadastro.features. Esquema do Cenário: Não deve cadastrar,Linha 9. Linha 34 do geral. -> Deve-se usar novo EMIAIL para simular cadastro com sucesso. Deveria ter informação do tipo, SENHA FORA DOS PADRÕES, ou NÃO ADICIONAR ESPAÇOS A SUA SENHA etc. NÃO TEM. Aplicação cadastra Normalmente.
+
+OBS.3: Para ver mensagem "Favor aceitar os termos de uso.", marcando o checkbox.
+Deve-se Informar ao menos Nome e Sobrenome no "Campo Nome completo."
+
+RESUMO BUGS:
+Senha_com_caracteres_inválidos
+        " -sou um erro "
+Deveria ter Mensagem de Alerta do tipo "Senha inválida" etc. Não informa o erro. Cadastra Normalmente mesmo senha com espaços.     -> BUG
+#Para ver bug deve-se informar CNPJ novo. 
 			
-Cenário: Checkbox_em_branco
-        Dado que acesso a pagina de cadastro
-        Quando faço meu cadastro com pelo menos o primeiro campo preenchido "Nome completo"
-        E não marco o checkbox
-        Então vejo a mensagem "Favor aceitar os termos de uso."
-#Deve-se ter ao menos 1 campo cadastrado, o primeiro, NOME COMPLETO.
-		
-Cenário: Email_incorreto
-	Dado que acesso a pagina de cadastro
-	Quando faço meu cadastro com "Nome Sobrenome", "*_naosouumemail.com", "11988776655", "um cargo", "17754136000190", "senhamais8Dig", "10000.00", "100000.00", "checkbox"
-        Então vejo a mensagem "Verifique o email informado" 
-#Para ver bug deve informar CNPJ novo. SEM MENSAGEM AO USUÁRIO. APLICAÇÃO FICA INERTE. BUG
+			
+Email_incorreto
+	"*_naosouumemail.com"
+Deveria ver a mensagem "Verifique o email informado" .
+#Para ver bug deve informar CNPJ novo. APLICAÇÃO FICA INERTE.              -> BUG
+
+
+Cargo com Símbolos, caractéres inexistentes.
+Deveria ter Mensagem de Alerta, CARGO INEXISTENTE ou Erro Cargo ETC.
+#Para ver bug deve informar CNPJ nov e email. NÃO TEM. Aplicação cadastra Normalmente.      ->   BUG

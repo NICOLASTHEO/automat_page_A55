@@ -1,0 +1,5 @@
+--- 
+default: -p html -p pretty
+html: --format html --out=log/features.html
+dot: --format progress
+pretty: --format pretty

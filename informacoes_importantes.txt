@@ -1,0 +1,32 @@
+Resumo de informações:
+Para cada teste completo informar 3 CNPJs diferentes.
+Um CNPJ novo para Cenário:Cadastro de usuário com sucesso. Esquema do Cenário: Cadastro de usuário, Exemplos:, Linha 1.
+Tendo em vista Falhas/Bugs na aplicação, pois Cadastra quando NÃO Deve Cadastrar, devemos informar mais dois CNPJ diferentes em complentação.
+Para constatação dos Bugs/falhas fazer como abaixo descrito:
+Um CNPJ novo e diferente para Cenário: Cargo com caracteres inválidos.
+Um CNPJ novo e diferente e um email novo para Cenário: Senha com caracteres inválidos.
+
+Cenário: Email_repetido 
+	Dado que acesso a pagina de cadastro
+		Quando faço meu cadastro com "Nome Sobrenome", "umemailqualquer@gmail.com", "11988776655", "um cargo", "67.160.507/0001-83", "senhamais8Dig", "10000.00", "100000.00", "checkbox"
+        Então vejo a mensagem "E-mail já cadastrado"
+#Deve-se usar CNPJ ainda não cadastrado para o validação da Mensagem de Email já cadastrado
+		
+Cenário: Senha_com_caracteres_inválidos
+        Dado que acesso a pagina de cadastro
+		Quando faço meu cadastro com "Nome Sobrenome", "umemailqualquer3@gmail.com", "11988776655", "um cargo", "01.607.539/0001-76", "-sou um erro ", "10000.00", "100000.00", "checkbox"
+        Então vejo a mensagem "Senha inválida"
+#Para ver bug deve-se informar CNPJ novo. Não informa o erro. Cadastra Normalmente mesmo senha com espaços. BUG
+			
+Cenário: Checkbox_em_branco
+        Dado que acesso a pagina de cadastro
+        Quando faço meu cadastro com pelo menos o primeiro campo preenchido "Nome completo"
+        E não marco o checkbox
+        Então vejo a mensagem "Favor aceitar os termos de uso."
+#Deve-se ter ao menos 1 campo cadastrado, o primeiro, NOME COMPLETO.
+		
+Cenário: Email_incorreto
+	Dado que acesso a pagina de cadastro
+	Quando faço meu cadastro com "Nome Sobrenome", "*_naosouumemail.com", "11988776655", "um cargo", "17754136000190", "senhamais8Dig", "10000.00", "100000.00", "checkbox"
+        Então vejo a mensagem "Verifique o email informado" 
+#Para ver bug deve informar CNPJ novo. SEM MENSAGEM AO USUÁRIO. APLICAÇÃO FICA INERTE. BUG
